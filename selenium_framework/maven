@@ -1,0 +1,46 @@
+-> How to create a maven project
+	1. Select File-> click on maven project-> default folder will be selected-> click next 
+	2. All archetype will be displayed
+	3. search the name "maven-archetype-quickstart"
+	4. select the archetype for creation of automation project. Archetype contains all the default project setup
+	5. select Artifact id = "maven-archetype-quickstart" and GroupId = "org.apache.maven.archetypes" 
+	6. click next -> Enter Project name in ArtifactId field
+	7. GroupId -> Is upper hirearchy of Artifact id or parent of artifact id
+		Eg: If ArtifactId is either AWS or shopping cart etc., then the GroupId will be Amazon because Amazon owns both the products
+		
+-> If we want to publish the project we have created, it can be done by providing the group id and artifactid in pom.xml file 
+	Eg: Below the group and artifact id for the project from pom.xml file
+		<groupId>learning</groupId>
+  		<artifactId>selenium_framework</artifactId>
+  		<version>0.0.1-SNAPSHOT</version>
+ 
+-> Get selenium maven dependencies to run the project
+	Go to Maven repository-> Add Selenum-java dependency-> Add TestNg dependency for the project-> Paste both dependency inside <dependencies> tag
+	
+-> Created account in https://rahulshettyacademy.com/client to practice
+	username = ajith_may_01@gmail.com
+	password = Ajith@1234
+
+-> Using WebDriverManager we can invoke the chrome driver. Without invoking the chrome driver from locally
+	Go to Maven repository-> Search WebDriverManager-> Get the latest Version and paste in Pom.xml file
+
+-> Page Object classes: It is mainly used to maintain the same locators under single java file and come from different test classes. 
+						Locators is again seperated based on the screen name, in which requests can be sent to seperate classes instead of calling same class multiple items
+						
+-> using page factory we can reduce the syntax of the webelement
+-> page object factory locators:
+
+	@FindBy(id = "idValue")						Locate by ID
+	@FindBy(name = "nameValue")					Locate by Name
+	@FindBy(css = "cssSelector")				Locate by CSS
+	@FindBy(xpath = "//tag[@attr='value']")		Locate by XPath
+	@FindBy(linkText = "Full Link Text")		Locate by Link Text
+	@FindBy(partialLinkText = "Partial")		Locate by Partial Link Text
+	
+-> general and page object syntax to find any Webelement and assigning
+	general syntax: WebElement sock = driver.findElement(By.id("TextBook"));		// this will find the element and assign the value to webelement sock
+	page-object syntax:  @FindBy(id="TextBook") WebElement socks 					// using find by element will be found and it will be stored in the webelement defined later in the line of code
+	
+		
+	
+	
