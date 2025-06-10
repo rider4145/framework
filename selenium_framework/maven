@@ -41,6 +41,99 @@
 	general syntax: WebElement sock = driver.findElement(By.id("TextBook"));		// this will find the element and assign the value to webelement sock
 	page-object syntax:  @FindBy(id="TextBook") WebElement socks 					// using find by element will be found and it will be stored in the webelement defined later in the line of code
 	
+-> 	To run the multiple test parallely
+	define parallel tagname in xml file fo suite and provide whether it should run at which level(test/class/method etc.,)
+
+-> thread count = 1 means one method in the class at a time is allowed to run parallely 
+
+	Eg: For multiple test to run parallely and thread count
+	
+		<?xml version="1.0" encoding="UTF-8"?>
+		<!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd">
+		<suite parallel="tests" name="Suite">								//define parallel and pass the value as test
+		  <test thread-count="5" name="standAlonstest2">					//at a time 5 methods can run in this standAloneTest2 java class 
+		    <classes>
+		      <class name="learning.framework.standAloneTest2"/>
+		    </classes>
+		  </test> <!-- Test -->
+		  
+		  <test thread-count="5" name="Errorvalidation">
+		  	<classes>
+		  		<class name="learning.framework.errorValidation"/>
+		  	</classes>
+		  </test>
+		  
+		</suite> <!-- Suite -->
 		
+-> to run any specific method irrespective of include or exclude ->define in method 
+	Syntax: use alwaysRun=true
+	
+	@BeforeMethod(alwaysRun=true)						// this method will run irrespective of any method because it is set as true
+	public Loginpage launchapp() throws IOException 
+	{
+		driver = initalize();
+		l = new Loginpage(driver);
+		l.goTo();
+		return l;
+		
+	}
+		
+		
+-> Dataprovider is used to handle defining the params in sepearate method and calling in other method. 
+-> It can be acheived by using @DataProvider tag in sender method, in receiver method using dataprovider="methodname"(pass the method name)
+	Syntax: @Test(dataProvider="data", groups ="purchase")				// used to call the data provide method and group the methods using name and execute only specific methods
+		
+-> Instead of using arrays always for defining the params, using hashmap also it can be acheived by defining the key values
+	if u need to send multiple times the data, u need to set multiple hashmaps
+	
+	Syntax: sending the values 
+		@DataProvider							
+		public Object[][] data()
+		{	
+			HashMap<Object,Object> map = new HashMap<>();				// define hashmap
+			map.put("email", "ajith_may_01@gmail.com");					// setting the values
+			map.put("pass", "Ajith@1234");								// setting the values
+			map.put("product", "ADIDAS ORIGINAL");						// setting the values
+			
+			
+			HashMap<Object,Object> map1 = new HashMap<>();				// defining multiple hashmap to send another set of values
+			map1.put("email", "ajith_may_01@gmail.com");
+			map1.put("pass", "Ajith@1234");
+			map1.put("product", "ZARA COAT 3");
+			
+			// pass the values directly without using Hashmap 
+			return new Object[][] {{"ajith_may_01@gmail.com","Ajith@1234","ADIDAS ORIGINAL"},{"ajith_may_01@gmail.com","Ajith@1234","ZARA COAT 3"}};
+			
+			// pass the values using hashmap
+			return new Object[][] {{map},{map1}};			//passing multiple hashmap values using object
+		}
+
+	Syntax: receiving the values
+	@Test(dataProvider="data", groups ="purchase")										// pass the method name where the data provider is created
+	public void submitorder(String email, String pass, String pr) throws IOException	// fetching the values directly from dataprovider method
+	public void submitorder(HashMap<String,String> input) throws IOException			//  fetching the values directly from dataprovider method using hashmap
+		
+-> Passing the values using json
+	1. create package and create a file inside the package-> save with extension as json format
+	2. open the file and create a array and set the values inside the array
+	Syntax:
+	[
+		{
+			"email":"ajith_may_01@gmail.com",
+			"pass":"Ajith@1234",
+			"product":"ADIDAS ORIGINAL"
+		},
+		{
+			"email":"ajith_may_01@gmail.com",
+			"pass":"Ajith@1234",
+			"product":"ZARA COAT 3"		
+		}
+	]
+	3. Create a utility/method which create a hashmaps out of json file
+	
+	
+-> Listeners has to be defined in the xml file to execute
+	
+	
 	
 	

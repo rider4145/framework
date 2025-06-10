@@ -43,7 +43,7 @@ public class Addtocart extends AbstractComponent{
 	{
 		WebElement prod = getproduct(pr);
 		prod.findElement(add).click();
-		visiElement(toast);	
+		visiElement(toast);
 		inviElement(disappear);
 		
 	}

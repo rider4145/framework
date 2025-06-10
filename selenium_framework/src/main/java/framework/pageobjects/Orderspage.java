@@ -14,30 +14,34 @@ import org.testng.Assert;
 
 import framework.abstractcomponents.AbstractComponent;
 
-public class Cartpage extends AbstractComponent{
+public class Orderspage extends AbstractComponent{
 
 	WebDriver driver;
-	public Cartpage(WebDriver driver) 
+	public Orderspage(WebDriver driver) 
 	{
 		super(driver);
 		this.driver = driver;
 		PageFactory.initElements(driver, this);
 	}
 	
-	
-	@FindBy(css=".cartSection h3") List<WebElement> cartlist;
 	@FindBy(css=".totalRow button") WebElement submit;
+	@FindBy(xpath="//tbody/tr[2]/td[2]") List<WebElement> product;		// find list of products using xpath
+	@FindBy(css="tr td:nth-child(3)") List<WebElement> product1;		// find list of products using css
+    @FindBy(xpath = "//table/tbody/tr[1]/th")List<WebElement> orderids;
 	
-	public Boolean validate(String pr)  
+	public Boolean verifyorders(String pr, String orderid) 
 	{
-		Boolean cond =cartlist.stream().anyMatch(s->s.getText().equalsIgnoreCase(pr));
-        return cond;
+		Boolean cond =product.stream().anyMatch(s->s.getText().equalsIgnoreCase(pr));
+		Boolean cond1 = orderids.stream().anyMatch(s1->s1.getText().equalsIgnoreCase(orderid));
+		
+		if(cond && cond1)
+		{
+			return true;
+		}
+		else
+		{
+			return false;
+		}
 	}
 	
-	public Placeorder checkout()
-	{
-		submit.click();
-		Placeorder po = new Placeorder(driver);
-		return po;
-	}
 }

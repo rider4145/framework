@@ -26,13 +26,14 @@ public class Confirmorder extends AbstractComponent{
 	@FindBy(css=".hero-primary") WebElement text;
 	@FindBy(css="label.ng-star-inserted") WebElement id;
 	
-	public void confirmorder(String actual) 
+	public String confirmorder(String actual) 
 	{
         String success = text.getText();
         Assert.assertTrue(actual.equalsIgnoreCase(success));
         System.out.println(success);
         String orderid = id.getText();
         System.out.println("orderid = "+" "+orderid);
+        return orderid;
 	}
 	
 	

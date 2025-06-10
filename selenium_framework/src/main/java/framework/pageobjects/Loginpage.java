@@ -29,16 +29,25 @@ public class Loginpage extends AbstractComponent{
 	@FindBy(id="userEmail")WebElement mail;					// the code is constructed using the page object factory and intialized using initelements
 	@FindBy(id="userPassword")WebElement pass;
 	@FindBy(id="login")WebElement login;
+	@FindBy(css= "[class*='flyInOut']")WebElement errormsg;
 	
 	public void goTo()
 	{
 		driver.get("https://rahulshettyacademy.com/client/");
 	}
-	public void loginapp(String usermail,String passw)
+	public Addtocart loginapp(String usermail,String passw)
 	{
 		mail.sendKeys(usermail);
 		pass.sendKeys(passw);
-		login.click();	
+		login.click();
+		Addtocart a = new Addtocart(driver);
+		return a;
+	}
+	
+	public String errormsg()
+	{
+		visiwebElement(errormsg);
+		return errormsg.getText();
 	}
 	
 }

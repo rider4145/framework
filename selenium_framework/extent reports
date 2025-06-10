@@ -1,0 +1,27 @@
+what is extent reports
+-> configuration to run extent reports (dependencies)
+	1. extent reports maven 
+	2. testng
+	3. selenium -java
+	
+-> extent reports and extent spark reporter are usefull t generate the reports
+	Syntax:
+	ExtentReport reports = new ExtentReport();
+-> extent spark reporter expects a path where the reports has to be generated
+	Syntax:
+	String path = System.getProperty("user.dir")+"//reports//index.html";  // path where the reports has to be saved
+	ExtentSparkReporter report = new ExtentSparkReporter(path);				// passing the path inside reporter object
+	
+	
+-> declare extent report and extent spark reporter object variables globally to acess over other methods
+-> declare create test() in other methods once it is declared, it will monitor the methods and provide reuslt based on method failed or passed
+	Syntax:
+	reports.createTest("Demo");			// provide test name
+-> whenever we createTest() one extent reports will create one object which is unique to test method. 
+	The object is responsible to listen and report all the happenigs back to extentreport
+
+-> To notify the test is done we need to use 
+	Syntax: reports.flush();
+	
+	
+-> To make the createTest generic to access over all methods. let's use the listeners

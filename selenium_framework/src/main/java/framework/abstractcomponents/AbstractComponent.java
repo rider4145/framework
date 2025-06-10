@@ -10,6 +10,9 @@ import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
+import framework.pageobjects.Cartpage;
+import framework.pageobjects.Orderspage;
+
 public class AbstractComponent 
 {
 	WebDriver driver;
@@ -19,6 +22,7 @@ public class AbstractComponent
 		PageFactory.initElements(driver, this);
 	}
 	@FindBy(css="[routerlink*='cart']") WebElement carticon;
+	@FindBy(css="[routerlink*='myorders']") WebElement ordersicon;
 	
 	public void visiElement(By findBy)
 	{
@@ -30,10 +34,23 @@ public class AbstractComponent
 		WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(4));
 		wait.until(ExpectedConditions.invisibilityOfElementLocated(findBy));
 	}
-	public void menubar()
+	public Cartpage menubar()
 	{
 		carticon.click();
+		Cartpage c = new Cartpage(driver);
+		return c;	
+	}
+	public void visiwebElement(WebElement findBy)
+	{
+		WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(4));
+		wait.until(ExpectedConditions.visibilityOf(findBy));
 	}
 	
+	public Orderspage orderspage()
+	{
+		ordersicon.click();	
+		Orderspage op = new Orderspage(driver);
+		return op;
+	}
 	
 }
