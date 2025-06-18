@@ -39,7 +39,7 @@ public class Orderspage extends AbstractComponent{
 			return true;
 		}
 		else
-		{
+		{	
 			return false;
 		}
 	}

@@ -113,10 +113,11 @@ public class Base {
 	{
 		TakesScreenshot ts = (TakesScreenshot)driver;
 		File src = ts.getScreenshotAs(OutputType.FILE);
-		File file = new File(System.getProperty(("user.dir")+ "//failed test reports"+ testcase +".png"));			// passing the failed testcase name in the testcase variable
+		String shot = System.getProperty("user.dir")+ "//reports//"+ testcase +".png";			// passing the failed testcase name in the testcase variable
+		File file = new File(shot);						// convert the screenshot from string to file 			
 		FileUtils.copyFile(src,file);
 		
-		return System.getProperty(("user.dir")+ "//failed test reports"+ testcase +".png");					// sending back the path to respective failed testcase
+		return shot;									// sending back the path to respective failed testcase
 	}
 	
 }

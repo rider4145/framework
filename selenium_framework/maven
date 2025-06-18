@@ -133,7 +133,51 @@
 	
 	
 -> Listeners has to be defined in the xml file to execute
+
+
+
+
+
+-> Execute the maven using cmd line 
+	1. download the apache maven src file and extract the binary zip file
+	2. set up the environmental variables
+	3. set the file path in Maven_Home
+	4. set the bin folder path in the path environmental variable
+	5. do version check using cmd mvn -version
+	6. search to maven testng integration in google and go to 1t site and copy the suites xml code 
+	7. open the pom.xml file in the project
+	8. create profiles tag below dependencies tag , we can create multiple profile in it
+	9. using profile we can execute the maven projects xml file
 	
+-> Syntax to create a the profile:
+	<profiles>									// profiles
+		<profile>								//1st profile
+		 <id>Regression</id>					// id is used to differentiate the each xml testng xml file and used to execute
+		  <build>
+    	   <pluginManagement><!-- lock down plugins versions to avoid using Maven defaults (may be moved to parent pom) -->
+     		<plugins>
+	       	 <plugin>
+		        <groupId>org.apache.maven.plugins</groupId>
+		        <artifactId>maven-surefire-plugin</artifactId>
+		        <version>3.5.3</version>
+		        <configuration>
+		          <suiteXmlFiles>
+		            <suiteXmlFile>testSuites/testng.xml</suiteXmlFile>		// pass the testng xml file name with the folder name in it
+		          </suiteXmlFiles>
+		        </configuration>
+		      </plugin>
+	    	 </plugins>
+	       </pluginManagement>
+	     </build>     
+	   </profile>
+	  </profiles>
+		
+-> cmd to execute the testng xml file using cmd prompt:
+	1. naviagte to project file and open the cmd prompt 
+	2. use the cmd to run the tests with keyword test -> mvn test (it will execute all the test with keyword test)
+	3. to run specific testng xml file using profile
+		syntax: mvn test -PRegression ( P stands for profile and Regression is the id name provided in the profile)
+	4. 
 	
 	
 	

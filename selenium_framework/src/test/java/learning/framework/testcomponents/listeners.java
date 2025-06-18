@@ -66,7 +66,7 @@ public class listeners extends Base implements ITestListener{
 	    	test.addScreenCaptureFromPath(path,result.getMethod().getMethodName());		// attaching the image path and along with method name
 	    }
 
-	    @Override
+	    @Override 
 	    public void onTestSkipped(ITestResult result) {
 	        
 	    }
